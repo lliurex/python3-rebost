@@ -8,7 +8,7 @@ import dbus,dbus.exceptions
 import logging
 import getpass
 
-class store():
+class client():
 	def __init__(self,*args,**kwargs):
 		self.dbg=False
 		logging.basicConfig(format='%(message)s')
