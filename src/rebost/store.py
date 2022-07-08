@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys,os
+import zlib
 import subprocess
 import json
 import signal
@@ -23,12 +24,13 @@ class client():
 			sudo_user=os.environ.get("SUDO_USER",'')
 			if sudo_user:
 				self.user=sudo_user
-#		self._debug("Selected user: {}".format(self.user))
+		self._debug("Selected user: {}".format(self.user))
 		self.rebost=None
 
 	def _debug(self,msg):
 		if self.dbg:
 			logging.warning("rebost: %s"%str(msg))
+			print("rebostClient: {}".format(msg))
 	#def _debug
 
 	def _connect(self):
@@ -44,9 +46,7 @@ class client():
 			sys.exit(1)
 	
 	def execute(self,action,args='',extraParms=''):
-		if self.n4dkey=='':
-			self.n4dkey=self._getN4dKey()
-		self._connect()
+		self._testConnection()
 		procId=0
 		if isinstance(args,str):
 			args=[args]
@@ -63,34 +63,23 @@ class client():
 				#		package=package.replace("-","_")
 
 					if action=='install':
-						if extraParms=="zomando":
-							zmdPath=os.path.join("/usr/share/zero-center/zmds","{}.zmd".format(package))
-							if os.path.isfile(zmdPath)==True:
-								procId=subprocess.run([zmdPath]).returncode
-						else:
-							procId=self.rebost.install(package,extraParms,self.user,self.n4dkey)
+						self.installApp(package,extraParms)
 					elif action=='remove':
-						if extraParms=="zomando":
-							extraParms="package"
-						procId=self.rebost.remove(package,extraParms,self.user,self.n4dkey)
+						self.removeApp(package,extraParms)
 					elif action=='test':
-						procId=self.rebost.test(package,extraParms,self.user)
+						self.testInstall(package,extraParms)
 					elif action=='remote_install':
-						procId=self.rebost.remote_install(package,extraParms,self.user)
+						self.remoteInstall(package,extraParms)
 					elif action=='search':
-						procId=self.rebost.search(package)
+						procId=self.searchApp(package)
 					elif action=='getCategories':
-						procId=self.rebost.getCategories()
+						procId=self.getCategories()
 					elif action=='list':
-						procId=self.rebost.search_by_category(package)
+						procId=self.getAppsInCategory(package,extraParms)
 					elif action=='show':
-						procId=self.rebost.show(package,self.user)
+						procId=self.showApp(package)
 					elif action=='enableGui':
-						if arg.lower()=="true":
-							arg=True
-						else:
-							arg=False
-						self.rebost.enableGui(arg)
+						procId=self.enableGui(arg)
 				except dbus.exceptions.DBusException as e:
 					desc=e.get_dbus_name()
 					if desc!="org.freedesktop.DBus.Error.AccessDenied":
@@ -98,7 +87,7 @@ class client():
 					procId=0
 				except Exception as e:
 					procId=0
-#					print("Err: %s"%e)
+					print("Err: %s"%e)
 				finally:
 					self.rebost=None
 		else:
@@ -117,8 +106,108 @@ class client():
 				print("Err: %s"%e)
 			finally:
 				self.rebost=None
+		if isinstance(procId,str)==False:
+			procId=str(procId)
+		return(procId)
 
-		return(str(procId))
+	def _testConnection(self):
+		if self.n4dkey=='':
+			self.n4dkey=self._getN4dKey()
+		self._connect()
+	#def _testConnection
+
+	def getCategories(self):
+		self._testConnection()
+		categories=self.rebost.getCategories()
+		return(str(categories))
+	#def getCategories(self):
+
+	def getAppsInCategory(self,category,limit=0):
+		self._testConnection()
+		bappsInCategory=0
+		appsInCategory={}
+		if isinstance(limit,int)==False:
+			limit=0
+		if limit>0:
+			bappsInCategory=self.rebost.search_by_category_limit(category,limit)
+		else:
+			bappsInCategory=self.rebost.search_by_category(category)
+
+		if bappsInCategory:
+			appsInCategory=zlib.decompress(bytes(bappsInCategory)).decode()
+		return(str(appsInCategory))
+	#def getAppsInCategory
+
+	def searchApp(self,app):
+		self._testConnection()
+		bapps=0
+		apps={}
+		bapps=self.rebost.search(app)
+
+		if bapps:
+			apps=zlib.decompress(bytes(bapps)).decode()
+		return(str(apps))
+	#def searchApp
+
+	def showApp(self,package):
+		self._testConnection()
+		package=self.rebost.show(package,self.user)
+		return(str(package))
+	#def searchApp
+
+	def installApp(self,package,bundle):
+		self._testConnection()
+		if bundle=="zomando":
+			zmdPath=os.path.join("/usr/share/zero-center/zmds","{}.zmd".format(package))
+			if os.path.isfile(zmdPath)==True:
+				installResult=subprocess.run([zmdPath]).returncode
+		else:
+			installResult=self.rebost.install(package,bundle,self.user,self.n4dkey)
+		return(str(installResult))
+	#def installApp
+
+	def testInstall(self,package,bundle,user=''):
+		self._testConnection()
+		if user=='':
+			user=self.user
+		testResult=self.rebost.test(package,bundle,user)
+		return(str(testResult))
+	#def testInstall
+
+	def removeApp(self,package,bundle):
+		self._testConnection()
+		if bundle=="zomando":
+			bundle="package"
+		removeResult=self.rebost.remove(package,bundle,self.user,self.n4dkey)
+		return(str(removeResult))
+	#def removeApp
+
+	def commitInstall(self,package,bundle,state):
+		self._testConnection()
+		commitResult=self.rebost.commitInstall(package,bundle,state)
+		return(str(commitResult))
+	#def commitInstall
+
+	def getEpiPkgStatus(self,epiScript):
+		self._testConnection()
+		pkgStatus=self.rebost.getEpiPkgStatus(epiScript)
+		return(str(pkgStatus))
+	#def getEpiPkgStatus
+
+	def remoteInstall(self,package,bundle,user=''):
+		self._testConnection()
+		if user=='':
+			user=self.user
+		remoteResult=self.rebost.remote_install(package,bundle,user)
+		return(str(remoteResult))
+	#def commitInstall
+
+	def enableGui(self,enable):
+		if isinstance(enable,bool)==False:
+			enable=bool(enable)
+		enabled=self.rebost.enableGui(enable)
+		return(str(enabled))
+	#def enableGui(self,enable):
 
 	def fullUpdate(self,procId=0):
 		self._connect()
