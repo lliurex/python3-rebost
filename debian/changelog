@@ -1,3 +1,9 @@
+python3-rebost (1.1) lliurex22; urgency=medium
+
+  * Implement high level api
+
+ -- Juanma1980 <juanma1980@gmail.com>  Fri, 08 Jul 2022 10:04:03 +0200
+
 python3-rebost (1.0) lliurex22; urgency=medium
 
   * Initial release. 
