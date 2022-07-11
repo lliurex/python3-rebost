@@ -63,13 +63,13 @@ class client():
 				#		package=package.replace("-","_")
 
 					if action=='install':
-						self.installApp(package,extraParms)
+						procId=self.installApp(package,extraParms)
 					elif action=='remove':
-						self.removeApp(package,extraParms)
+						procId=self.removeApp(package,extraParms)
 					elif action=='test':
-						self.testInstall(package,extraParms)
+						procId=self.testInstall(package,extraParms)
 					elif action=='remote_install':
-						self.remoteInstall(package,extraParms)
+						procId=self.remoteInstall(package,extraParms)
 					elif action=='search':
 						procId=self.searchApp(package)
 					elif action=='getCategories':
@@ -203,7 +203,12 @@ class client():
 	#def commitInstall
 
 	def enableGui(self,enable):
-		if isinstance(enable,bool)==False:
+		self._testConnection()
+		enable=False
+		if isinstance(enable,str):
+			if enable.lower()!="false":
+				enable=True
+		elif isinstance(enable,int)==True:
 			enable=bool(enable)
 		enabled=self.rebost.enableGui(enable)
 		return(str(enabled))
