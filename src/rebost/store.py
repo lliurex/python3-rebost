@@ -138,6 +138,18 @@ class client():
 		return(str(appsInCategory))
 	#def getAppsInCategory
 
+	def getInstalledApps(self):
+		self._testConnection()
+		installedApps=self.rebost.getInstalledApps()
+		return(str(installedApps))
+	#def getInstalledApps
+
+	def getInstalledApps(self):
+		self._testConnection()
+		upgradableApps=self.rebost.getUpgradableApps()
+		return(str(upgradableApps))
+	#def getInstalledApps
+
 	def searchApp(self,app):
 		self._testConnection()
 		bapps=0
