@@ -226,19 +226,18 @@ class client():
 		return(str(enabled))
 	#def enableGui(self,enable):
 
-	def fullUpdate(self,procId=0):
+	def forceUpdate(self,procId=0):
 		self._connect()
+		return({})
 		bus=self.rebost.fullUpdate()
 		progressDict=json.loads(bus)
 		self.rebost=None
 		return(progressDict)
 
-	def update(self,procId=0):
-		self._connect()
-		bus=self.rebost.update()
-		progressDict=json.loads(bus)
-		self.rebost=None
-		return(progressDict)
+	def update(self,force=False):
+		self._testConnection()
+		updateResult=self.rebost.update(force)
+		return(str(updateResult))
 
 	def getProgress(self,procId=0):
 		self._connect()
