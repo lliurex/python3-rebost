@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys,os
+import sys,os,time
 import zlib
 import subprocess
 import json
@@ -43,7 +43,13 @@ class client():
 			self.rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
 		except Exception as e:
 			print("Could not connect to bus: %s\nAborting"%e)
-			sys.exit(1)
+			print("2nd attempt...")
+			time.sleep(2)
+			try:
+				self.rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+			except:
+				print("Could not connect to bus: %s\nAborting"%e)
+				sys.exit(1)
 	
 	def execute(self,action,args='',extraParms=''):
 		self._testConnection()
@@ -238,6 +244,11 @@ class client():
 		self._testConnection()
 		updateResult=self.rebost.update(force)
 		return(str(updateResult))
+
+	def restart(self):
+		self._testConnection()
+		restartResult=self.rebost.restart()
+		return(str(restartResult))
 
 	def getProgress(self,procId=0):
 		self._connect()
