@@ -245,6 +245,11 @@ class client():
 		updateResult=self.rebost.update(force)
 		return(str(updateResult))
 
+	def restart(self):
+		self._testConnection()
+		restartResult=self.rebost.restart()
+		return(str(restartResult))
+
 	def getProgress(self,procId=0):
 		self._connect()
 		bus=self.rebost.getResults()
