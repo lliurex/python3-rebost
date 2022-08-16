@@ -119,8 +119,8 @@ class client():
 		return(procId)
 
 	def _testConnection(self):
-		#if self.n4dkey=='':
-		#	self.n4dkey=self._getN4dKey()
+		if self.n4dkey=='':
+			self.n4dkey=self._getN4dKey()
 		self._connect()
 	#def _testConnection
 
