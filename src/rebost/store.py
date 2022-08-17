@@ -11,7 +11,7 @@ import getpass
 
 class client():
 	def __init__(self,*args,**kwargs):
-		self.dbg=False
+		self.dbg=True
 		logging.basicConfig(format='%(message)s')
 		self.user=''
 		self.n4dkey=''
@@ -40,15 +40,17 @@ class client():
 			print("Could not get session bus: %s\nAborting"%e)
 			sys.exit(1)
 		try:
-			self.rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+			rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+			self.rebost=dbus.Interface(rebost,"net.lliurex.rebost")
 		except Exception as e:
 			print("Could not connect to bus: %s\nAborting"%e)
 			print("2nd attempt...")
 			time.sleep(2)
 			try:
-				self.rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+				rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+				self.rebost=dbus.Interface(rebost,"net.lliurex.rebost")
 			except:
-				print("Could not connect to bus: %s\nAborting"%e)
+				print("Could not reconnect to bus: %s\nAborting"%e)
 				sys.exit(1)
 	
 	def execute(self,action,args='',extraParms=''):
@@ -161,7 +163,6 @@ class client():
 		bapps=0
 		apps={}
 		bapps=self.rebost.search(app)
-
 		if bapps:
 			apps=zlib.decompress(bytes(bapps)).decode()
 		return(str(apps))
@@ -228,7 +229,8 @@ class client():
 				enable=True
 		elif isinstance(enable,int)==True:
 			enable=bool(enable)
-		enabled=self.rebost.enableGui(enable)
+		#enabled=self.rebost.enableGui(enable)
+		enabled="true"
 		return(str(enabled))
 	#def enableGui(self,enable):
 
