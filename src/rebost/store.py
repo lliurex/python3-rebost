@@ -244,7 +244,12 @@ class client():
 
 	def update(self,force=False):
 		self._testConnection()
-		updateResult=self.rebost.update(force)
+		updateResult={}
+		try:
+			updateResult=self.rebost.update(force)
+		except Exception as e:
+			time.sleep(10)
+			print(e)
 		return(str(updateResult))
 
 	def restart(self):
