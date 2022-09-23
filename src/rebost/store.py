@@ -189,7 +189,10 @@ class client():
 		self._testConnection()
 		if user=='':
 			user=self.user
-		testResult=self.rebost.test(package,bundle,user)
+		try:
+			testResult=self.rebost.test(package,bundle,user)
+		except Exception as e:
+			testResult=[("-1",{'pid':"{}",'package':package,'done':1,'status':'','msg':'User has no  permissions'})]
 		return(str(testResult))
 	#def testInstall
 
