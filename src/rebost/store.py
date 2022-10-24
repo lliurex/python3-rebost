@@ -152,9 +152,11 @@ class client():
 		return(str(installedApps))
 	#def getInstalledApps
 
-	def getUpgradableApps(self):
+	def getUpgradableApps(self,user=''):
 		self._testConnection()
-		upgradableApps=self.rebost.getUpgradableApps()
+		if user=='':
+			user=self.user
+		upgradableApps=self.rebost.getUpgradableApps(user)
 		return(str(upgradableApps))
 	#def getInstalledApps
 
