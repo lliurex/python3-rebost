@@ -1,6 +1,7 @@
-python3-rebost (1.5.3) lliurex22; urgency=medium
+python3-rebost (1.5.4) lliurex22; urgency=medium
 
   * Catch dbus exception on connect
+  * WIP on upgrade apps
 
  -- Juanma1980 <juanma1980@gmail.com>  Fri, 23 Sep 2022 10:09:13 +0200
 
