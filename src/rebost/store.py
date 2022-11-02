@@ -176,6 +176,20 @@ class client():
 		return(str(package))
 	#def searchApp
 
+	def getAppStatus(self,package,bundle):
+		self._testConnection()
+		package=self.testInstall(package,bundle,self.user)
+		try:
+			package=json.loads(package)[0]
+		except:
+			package={}
+		epiFile=package.get('script','')
+		status="1"
+		if os.path.isfile(epiFile):
+			status=self.getEpiPkgStatus(epiFile)
+			#os.remove(epiFile)
+		return(status)
+
 	def installApp(self,package,bundle):
 		self._testConnection()
 		if bundle=="zomando":
