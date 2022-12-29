@@ -102,9 +102,9 @@ class client():
 			try:
 				if action=='update':
 					procId=self.rebost.update()
-				if action=='fullupdate':
-					procId=self.rebost.fullUpdate()
-				if action=='load':
+				#if action=='fullupdate':
+				#	procId=self.rebost.fullUpdate()
+				elif action=='load':
 					procId=self.rebost.load(package,extraParms)
 			except dbus.exceptions.DBusException as e:
 				procId=0
