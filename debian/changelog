@@ -1,3 +1,9 @@
+python3-rebost (1.6.0) focal; urgency=medium
+
+  * deprecate fullupdate method
+
+ -- Juanma1980 <juanma1980@gmail.com>  Thu, 29 Dec 2022 13:26:49 +0100
+
 python3-rebost (1.5.5) lliurex22; urgency=medium
 
   * New method getAppStatus
