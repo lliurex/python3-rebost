@@ -260,6 +260,7 @@ class client():
 		progressDict=json.loads(bus)
 		self.rebost=None
 		return(progressDict)
+	#def forceUpdate
 
 	def update(self,force=False):
 		self._testConnection()
@@ -270,11 +271,13 @@ class client():
 			time.sleep(10)
 			print(e)
 		return(str(updateResult))
+	#def update
 
 	def restart(self):
 		self._testConnection()
 		restartResult=self.rebost.restart()
 		return(str(restartResult))
+	#def restart
 
 	def getProgress(self,procId=0):
 		self._connect()
@@ -282,6 +285,7 @@ class client():
 		progressDict=json.loads(bus)
 		self.rebost=None
 		return(progressDict)
+	#def getProgress
 	
 	def getResults(self,procId=0):
 		self._connect()
@@ -289,11 +293,19 @@ class client():
 		results=json.loads(bus)
 		self.rebost=None
 		return(results)
+	#def getResults
 
 	def disableFilters(self):
 		self._connect()
 		result=self.rebost.disableFilters()
 		return(result)
+	#def disableFilters
+	
+	def getFiltersEnabled(self):
+		self._connect()
+		result=self.rebost.getFiltersEnabled()
+		return(result)
+	#def getFiltersEnabled
 	
 	def getPlugins(self):
 		pass
@@ -306,3 +318,4 @@ class client():
 		except:
 			pass
 		return(n4dkey)
+	#def _getN4dKey
