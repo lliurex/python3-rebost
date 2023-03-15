@@ -289,6 +289,11 @@ class client():
 		results=json.loads(bus)
 		self.rebost=None
 		return(results)
+
+	def disableFilters(self):
+		self._connect()
+		result=self.rebost.disableFilters()
+		return(result)
 	
 	def getPlugins(self):
 		pass
