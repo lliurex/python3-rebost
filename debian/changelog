@@ -1,3 +1,9 @@
+python3-rebost (1.6.1-lliurex23) jammy; urgency=medium
+
+  * Jammy release
+
+ -- Juanma1980 <juanma1980@gmail.com>  Tue, 05 Sep 2023 12:38:39 +0200
+
 python3-rebost (1.6.1) focal; urgency=medium
 
   * Improve filters
