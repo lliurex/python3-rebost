@@ -1,3 +1,9 @@
+python3-rebost (1.7-1lliurex23) jammy; urgency=medium
+
+  * New method getFiltersEnabled
+
+ -- Juanma1980 <juanma1980@gmail.com>  Fri, 22 Dec 2023 12:22:00 +0100
+
 python3-rebost (1.6.1lliurex23) jammy; urgency=medium
 
   * Jammy release
