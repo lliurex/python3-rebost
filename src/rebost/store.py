@@ -67,9 +67,6 @@ class client():
 				else:
 					package=arg
 				try:
-				#	if "-" in package:
-				#		package=package.replace("-","_")
-
 					if action=='install':
 						procId=self.installApp(package,extraParms)
 					elif action=='remove':
@@ -96,8 +93,8 @@ class client():
 				except Exception as e:
 					procId=0
 					print("Err: %s"%e)
-				finally:
-					self.rebost=None
+			#	finally:
+			#		self.rebost=None
 		else:
 			try:
 				if action=='update':
@@ -172,7 +169,10 @@ class client():
 
 	def showApp(self,package):
 		self._testConnection()
-		package=self.rebost.show(package,self.user)
+		try:
+			package=self.rebost.show(package,self.user)
+		except Exception as e:
+			print(e)
 		return(str(package))
 	#def searchApp
 
