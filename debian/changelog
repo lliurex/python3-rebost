@@ -1,3 +1,9 @@
+python3-rebost (1.7.1) focal; urgency=medium
+
+  * New method getFiltersEnabled
+
+ -- Juanma1980 <juanma1980@gmail.com>  Wed, 10 Jan 2024 11:48:57 +0100
+
 python3-rebost (1.6.1) focal; urgency=medium
 
   * Improve filters
