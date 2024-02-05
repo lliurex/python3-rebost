@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!usr/bin/env python3
 import sys,os,time
 import zlib
 import subprocess
@@ -105,6 +105,8 @@ class client():
 				#	procId=self.rebost.fullUpdate()
 				elif action=='load':
 					procId=self.rebost.load(package,extraParms)
+				elif action=='export':
+					procId=self.rebost.export()
 			except dbus.exceptions.DBusException as e:
 				procId=0
 				print("Dbus Error: %s"%e)
@@ -185,6 +187,15 @@ class client():
 		except Exception as e:
 			print(e)
 		return(str(package))
+	#def searchApp
+
+	def export(self):
+		self._testConnection()
+		try:
+			self.rebost.export("")
+		except Exception as e:
+			print(e)
+		return("")
 	#def searchApp
 
 	def getAppStatus(self,package,bundle):
