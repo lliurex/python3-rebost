@@ -83,6 +83,8 @@ class client():
 						procId=self.getAppsInCategory(package,extraParms)
 					elif action=='show':
 						procId=self.showApp(package)
+					elif action=='match':
+						procId=self.matchApp(package)
 					elif action=='enableGui':
 						procId=self.enableGui(arg)
 				except dbus.exceptions.DBusException as e:
@@ -165,6 +167,15 @@ class client():
 		if bapps:
 			apps=zlib.decompress(bytes(bapps)).decode()
 		return(str(apps))
+	#def searchApp
+
+	def matchApp(self,package):
+		self._testConnection()
+		try:
+			package=self.rebost.match(package,self.user)
+		except Exception as e:
+			print(e)
+		return(str(package))
 	#def searchApp
 
 	def showApp(self,package):
