@@ -1,3 +1,9 @@
+python3-rebost (1.8-1lliurex23) jammy; urgency=medium
+
+  * Match method
+
+ -- Juanma1980 <juanma1980@gmail.com>  Fri, 09 Feb 2024 10:36:00 +0100
+
 python3-rebost (1.7-1lliurex23) jammy; urgency=medium
 
   * New method getFiltersEnabled
