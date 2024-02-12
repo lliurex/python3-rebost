@@ -1,3 +1,9 @@
+python3-rebost (1.8.0-0lliurex21) focal; urgency=medium
+
+  * Jammy backport
+
+ -- Juanma1980 <juanma1980@gmail.com>  Mon, 12 Feb 2024 16:54:27 +0100
+
 python3-rebost (1.7.1) focal; urgency=medium
 
   * New method getFiltersEnabled
