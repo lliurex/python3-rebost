@@ -1,8 +1,8 @@
-python3-rebost (1.8-0lliurex23) jammy; urgency=medium
+python3-rebost (1.8-1lliurex23) jammy; urgency=medium
 
-  * Session DBus
+  * Match method
 
- -- Juanma1980 <juanma1980@gmail.com>  Sat, 17 Feb 2024 11:05:44 +0100
+ -- Juanma1980 <juanma1980@gmail.com>  Fri, 09 Feb 2024 10:36:00 +0100
 
 python3-rebost (1.7-1lliurex23) jammy; urgency=medium
 
