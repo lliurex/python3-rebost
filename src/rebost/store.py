@@ -35,7 +35,7 @@ class client():
 
 	def _connect(self):
 		try:
-			bus=dbus.SystemBus()
+			bus=dbus.Bus()
 		except Exception as e:
 			print("Could not get session bus: %s\nAborting"%e)
 			sys.exit(1)
