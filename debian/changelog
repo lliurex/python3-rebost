@@ -1,3 +1,10 @@
+python3-rebost (1.9-0lliurex25) noble; urgency=medium
+
+  * Noble release
+  * Switch to pyproject
+
+ -- Juanma1980 <juanma1980@gmail.com>  Thu, 19 Sep 2024 08:24:03 +0200
+
 python3-rebost (1.9-0lliurex23) jammy; urgency=medium
 
   * Session DBus
