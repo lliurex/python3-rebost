@@ -36,7 +36,7 @@ if __name__ == '__main__':
         license='GPL',
         platforms='UNIX',
 #        scripts = [''],
-        package_dir = {'':'src'},
+        package_dir = {'':''},
         packages = ['rebost'],
         data_files = [],
         classifiers=[
