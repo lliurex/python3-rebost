@@ -254,13 +254,16 @@ class client():
 		return(str(pkgStatus))
 	#def getEpiPkgStatus
 
+	def updatePkgData(self,pkgname,rebostPkg):
+		self.rebost.updatePkgData(pkgname,json.dumps(rebostPkg))
+
 	def remoteInstall(self,package,bundle,user=''):
 		self._testConnection()
 		if user=='':
 			user=self.user
 		remoteResult=self.rebost.remote_install(package,bundle,user)
 		return(str(remoteResult))
-	#def commitInstall
+	#def remoteInstall
 
 	def enableGui(self,enable):
 		self._testConnection()
