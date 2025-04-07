@@ -334,6 +334,10 @@ class client():
 	
 	def getPlugins(self):
 		pass
+
+	def commitData(self):
+		self.rebost.commitData()
+	#def commitData
 	
 	def _getN4dKey(self):
 		n4dkey=''
