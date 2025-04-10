@@ -1,3 +1,9 @@
+python3-rebost (1.9.2-0llx23) noble; urgency=medium
+
+  * Sync with Jammy
+
+ -- Juanma1980 <juanma1980@gmail.com>  Thu, 10 Apr 2025 09:49:34 +0200
+
 python3-rebost (1.9-0lliurex25) noble; urgency=medium
 
   * Noble release
