@@ -338,6 +338,18 @@ class client():
 	def commitData(self):
 		self.rebost.commitData()
 	#def commitData
+
+	def lock(self):
+		self._connect()
+		result=self.rebost.lock()
+		return(result)
+	#def lock
+
+	def unlock(self):
+		self._connect()
+		result=self.rebost.unlock()
+		return(result)
+	#def unlock
 	
 	def _getN4dKey(self):
 		n4dkey=''
