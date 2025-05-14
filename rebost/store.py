@@ -339,6 +339,11 @@ class client():
 		self.rebost.commitData()
 	#def commitData
 
+	def getLockStatus(self):
+		self._connect()
+		result=self.rebost.getLockStatus()
+		return(result)
+
 	def lock(self):
 		self._connect()
 		result=self.rebost.lock()
