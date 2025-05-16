@@ -1,4 +1,10 @@
-python3-rebost (1.9.2-0llx23) noble; urgency=medium
+python3-rebost (1.9.3-0llx25) noble; urgency=medium
+
+  * Add lock/unlock methods
+
+ -- Juanma1980 <juanma1980@gmail.com>  Fri, 16 May 2025 06:40:19 +0200
+
+python3-rebost (1.9.2-0llx25) noble; urgency=medium
 
   * Sync with Jammy
 
