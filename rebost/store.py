@@ -79,6 +79,8 @@ class client():
 						procId=self.searchApp(package)
 					elif action=='getCategories':
 						procId=self.getCategories()
+					elif action=='getFreedesktopCategories':
+						procId=self.getFreedesktopCategories()
 					elif action=='list':
 						procId=self.getAppsInCategory(package,extraParms)
 					elif action=='show':
@@ -130,6 +132,12 @@ class client():
 		categories=self.rebost.getCategories()
 		return(str(categories))
 	#def getCategories(self):
+
+	def getFreedesktopCategories(self):
+		self._testConnection()
+		categories=self.rebost.getFreedesktopCategories()
+		return(str(categories))
+	#def getFreedesktopCategories(self):
 
 	def getAppsInCategory(self,category,limit=0):
 		self._testConnection()
