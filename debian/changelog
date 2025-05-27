@@ -1,3 +1,9 @@
+python3-rebost (1.9.3-0llx23) jammy; urgency=medium
+
+  * Sync with noble
+
+ -- Juanma1980 <juanma1980@gmail.com>  Tue, 27 May 2025 09:32:12 +0200
+
 python3-rebost (1.9.2-0llx23) jammy; urgency=medium
 
   * Add commitData for sync tmp<->cache
