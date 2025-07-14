@@ -6,12 +6,13 @@ import json
 import signal
 import ast
 import dbus,dbus.exceptions
+from _dbus_bindings import BUS_DAEMON_IFACE, BUS_DAEMON_NAME, BUS_DAEMON_PATH
 import logging
 import getpass
 
 class client():
 	def __init__(self,*args,**kwargs):
-		self.dbg=False
+		self.dbg=True
 		logging.basicConfig(format='%(message)s')
 		self.user=''
 		self.n4dkey=''
@@ -39,19 +40,27 @@ class client():
 		except Exception as e:
 			print("Could not get session bus: %s\nAborting"%e)
 			sys.exit(1)
-		try:
-			rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
-			self.rebost=dbus.Interface(rebost,"net.lliurex.rebost")
-		except Exception as e:
-			print("Could not connect to bus: %s\nAborting"%e)
-			print("2nd attempt...")
-			time.sleep(2)
+		#Five attempts within 60sec
+		current=int(time.time())
+		end=current+60
+		waitFor=1
+		rebost=None
+		while end>current:
 			try:
 				rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
-				self.rebost=dbus.Interface(rebost,"net.lliurex.rebost")
-			except:
-				print("Could not reconnect to bus: %s\nAborting"%e)
-				sys.exit(1)
+				current=end+1
+			except Exception as e:
+				print("Could not connect to bus: {}\nAborting".format(e))
+				print("2nd attempt...")
+				time.sleep(waitFor)
+				current=int(time.time())
+				rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+
+		if rebost==None:
+			print("Could not reconnect to bus: %s\nAborting"%e)
+			sys.exit(1)
+		self.rebost=dbus.Interface(rebost,"net.lliurex.rebost")
+	#def _connect
 	
 	def execute(self,action,args='',extraParms=''):
 		self._testConnection()
