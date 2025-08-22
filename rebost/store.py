@@ -145,23 +145,33 @@ class client():
 	def getFreedesktopCategories(self):
 		self._testConnection()
 		categories=self.rebost.getFreedesktopCategories()
-		return(str(categories))
+		return(categories)
 	#def getFreedesktopCategories(self):
+
+	def getAppsPerCategory(self):
+		self._testConnection()
+		apps=self.rebost.getAppsPerCategory()
+		#if limit>0:
+		#	bappsInCategory=self.rebost.search_by_category_limit(category,limit)
+		#else:
+		#	bappsInCategory=self.rebost.search_by_category(category)
+
+		#if bappsInCategory:
+		#	appsInCategory=zlib.decompress(bytes(bappsInCategory)).decode()
+		return(apps)
+	#def getAppsPerCategory
 
 	def getAppsInCategory(self,category,limit=0):
 		self._testConnection()
-		bappsInCategory=0
-		appsInCategory={}
-		if isinstance(limit,int)==False:
-			limit=0
-		if limit>0:
-			bappsInCategory=self.rebost.search_by_category_limit(category,limit)
-		else:
-			bappsInCategory=self.rebost.search_by_category(category)
+		appsInCategory=self.rebost.getAppsInCategory(category)
+		#if limit>0:
+		#	bappsInCategory=self.rebost.search_by_category_limit(category,limit)
+		#else:
+		#	bappsInCategory=self.rebost.search_by_category(category)
 
-		if bappsInCategory:
-			appsInCategory=zlib.decompress(bytes(bappsInCategory)).decode()
-		return(str(appsInCategory))
+		#if bappsInCategory:
+		#	appsInCategory=zlib.decompress(bytes(bappsInCategory)).decode()
+		return(appsInCategory)
 	#def getAppsInCategory
 
 	def getInstalledApps(self):
@@ -178,14 +188,22 @@ class client():
 		return(str(upgradableApps))
 	#def getInstalledApps
 
+	def getApps(self):
+		self._testConnection()
+		apps=self.rebost.getApps()
+		return(apps)
+	#def getInstalledApps
+
 	def searchApp(self,app):
 		self._testConnection()
-		bapps=0
-		apps={}
-		bapps=self.rebost.search(app)
-		if bapps:
-			apps=zlib.decompress(bytes(bapps)).decode()
-		return(str(apps))
+		apps=self.rebost.search(app)
+		return(apps)
+	#def searchApp
+
+	def searchAppByUrl(self,url):
+		self._testConnection()
+		apps=self.rebost.searchAppByUrl(url)
+		return(apps)
 	#def searchApp
 
 	def matchApp(self,package):
@@ -200,10 +218,11 @@ class client():
 	def showApp(self,package):
 		self._testConnection()
 		try:
-			package=self.rebost.show(package,self.user)
+			package=self.rebost.showApp(package)
 		except Exception as e:
 			print(e)
-		return(str(package))
+		print(package)
+		return(package)
 	#def searchApp
 
 	def export(self):
