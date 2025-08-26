@@ -259,16 +259,15 @@ class client():
 		return(str(installResult))
 	#def installApp
 
-	def testInstall(self,package,bundle,user=''):
+	def getExternalInstaller(self):
 		self._testConnection()
-		if user=='':
-			user=self.user
+		installer=""
 		try:
-			testResult=self.rebost.test(package,bundle,user)
+			installer=self.rebost.getExternalInstaller()
 		except Exception as e:
-			testResult=[("-1",{'pid':"{}",'package':package,'done':1,'status':'','msg':'User has no  permissions'})]
-		return(str(testResult))
-	#def testInstall
+			print(e)
+		return(installer)
+	#def installPpp
 
 	def removeApp(self,package,bundle):
 		self._testConnection()
