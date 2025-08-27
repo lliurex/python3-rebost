@@ -221,9 +221,19 @@ class client():
 			package=self.rebost.showApp(package)
 		except Exception as e:
 			print(e)
-		print(package)
 		return(package)
 	#def searchApp
+
+	def setAppState(self,appId,state,bundle,temp=True):
+		self._testConnection()
+		try:
+			if temp==False:
+				package=self.rebost.setAppState(appId,state,bundle)
+			else:
+				package=self.rebost.setAppStateTmp(appId,state)
+		except Exception as e:
+			print(e)
+		return(package)
 
 	def export(self):
 		self._testConnection()
