@@ -151,32 +151,18 @@ class client():
 	def getAppsPerCategory(self):
 		self._testConnection()
 		apps=self.rebost.getAppsPerCategory()
-		#if limit>0:
-		#	bappsInCategory=self.rebost.search_by_category_limit(category,limit)
-		#else:
-		#	bappsInCategory=self.rebost.search_by_category(category)
-
-		#if bappsInCategory:
-		#	appsInCategory=zlib.decompress(bytes(bappsInCategory)).decode()
 		return(apps)
 	#def getAppsPerCategory
 
 	def getAppsInCategory(self,category,limit=0):
 		self._testConnection()
 		appsInCategory=self.rebost.getAppsInCategory(category)
-		#if limit>0:
-		#	bappsInCategory=self.rebost.search_by_category_limit(category,limit)
-		#else:
-		#	bappsInCategory=self.rebost.search_by_category(category)
-
-		#if bappsInCategory:
-		#	appsInCategory=zlib.decompress(bytes(bappsInCategory)).decode()
 		return(appsInCategory)
 	#def getAppsInCategory
 
-	def getInstalledApps(self):
+	def getAppsInstalled(self):
 		self._testConnection()
-		installedApps=self.rebost.getInstalledApps()
+		installedApps=self.rebost.getAppsInstalled()
 		return(str(installedApps))
 	#def getInstalledApps
 
