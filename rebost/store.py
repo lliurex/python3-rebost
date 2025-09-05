@@ -136,17 +136,23 @@ class client():
 		self._connect()
 	#def _testConnection
 
-	def getCategories(self):
+	def getSupportedFormats(self):
 		self._testConnection()
-		categories=self.rebost.getCategories()
-		return(str(categories))
-	#def getCategories(self):
+		formats=self.rebost.getSupportedFormats()
+		return(formats)
+	#def getSupportedFormats(
 
 	def getFreedesktopCategories(self):
 		self._testConnection()
 		categories=self.rebost.getFreedesktopCategories()
 		return(categories)
 	#def getFreedesktopCategories(self):
+
+	def getCategories(self):
+		self._testConnection()
+		categories=self.rebost.getCategories()
+		return(str(categories))
+	#def getCategories(self):
 
 	def getAppsPerCategory(self):
 		self._testConnection()
