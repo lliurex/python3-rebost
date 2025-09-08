@@ -216,6 +216,15 @@ class client():
 		return(package)
 	#def searchApp
 
+	def refreshApp(self,package):
+		self._testConnection()
+		try:
+			package=self.rebost.refreshApp(package)
+		except Exception as e:
+			print(e)
+		return(package)
+	#def searchApp
+
 	def setAppState(self,appId,state,bundle,temp=True):
 		self._testConnection()
 		try:
