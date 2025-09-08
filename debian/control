@@ -10,5 +10,7 @@ Homepage: http://lliurex.net
 
 Package: python3-rebost
 Architecture: all
-Depends: python3, python3-dbus,rebost>=3.0
+Depends: python3, 
+         python3-dbus,
+         rebost (>=3.0),
 Description: Python client for rebost
