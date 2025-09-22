@@ -136,6 +136,18 @@ class client():
 		self._connect()
 	#def _testConnection
 
+	def toggleLock(self):
+		self._testConnection()
+		config=self.rebost.toggleLock()
+		return(config)
+	#def toggleLock
+
+	def getConfig(self):
+		self._testConnection()
+		config=self.rebost.getConfig()
+		return(config)
+	#def getConfig
+
 	def getSupportedFormats(self):
 		self._testConnection()
 		formats=self.rebost.getSupportedFormats()
