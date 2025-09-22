@@ -136,37 +136,39 @@ class client():
 		self._connect()
 	#def _testConnection
 
+	def getSupportedFormats(self):
+		self._testConnection()
+		formats=self.rebost.getSupportedFormats()
+		return(formats)
+	#def getSupportedFormats(
+
+	def getFreedesktopCategories(self):
+		self._testConnection()
+		categories=self.rebost.getFreedesktopCategories()
+		return(categories)
+	#def getFreedesktopCategories(self):
+
 	def getCategories(self):
 		self._testConnection()
 		categories=self.rebost.getCategories()
 		return(str(categories))
 	#def getCategories(self):
 
-	def getFreedesktopCategories(self):
+	def getAppsPerCategory(self):
 		self._testConnection()
-		categories=self.rebost.getFreedesktopCategories()
-		return(str(categories))
-	#def getFreedesktopCategories(self):
+		apps=self.rebost.getAppsPerCategory()
+		return(apps)
+	#def getAppsPerCategory
 
 	def getAppsInCategory(self,category,limit=0):
 		self._testConnection()
-		bappsInCategory=0
-		appsInCategory={}
-		if isinstance(limit,int)==False:
-			limit=0
-		if limit>0:
-			bappsInCategory=self.rebost.search_by_category_limit(category,limit)
-		else:
-			bappsInCategory=self.rebost.search_by_category(category)
-
-		if bappsInCategory:
-			appsInCategory=zlib.decompress(bytes(bappsInCategory)).decode()
-		return(str(appsInCategory))
+		appsInCategory=self.rebost.getAppsInCategory(category)
+		return(appsInCategory)
 	#def getAppsInCategory
 
-	def getInstalledApps(self):
+	def getAppsInstalled(self):
 		self._testConnection()
-		installedApps=self.rebost.getInstalledApps()
+		installedApps=self.rebost.getAppsInstalled()
 		return(str(installedApps))
 	#def getInstalledApps
 
@@ -178,14 +180,22 @@ class client():
 		return(str(upgradableApps))
 	#def getInstalledApps
 
+	def getApps(self):
+		self._testConnection()
+		apps=self.rebost.getApps()
+		return(apps)
+	#def getInstalledApps
+
 	def searchApp(self,app):
 		self._testConnection()
-		bapps=0
-		apps={}
-		bapps=self.rebost.search(app)
-		if bapps:
-			apps=zlib.decompress(bytes(bapps)).decode()
-		return(str(apps))
+		apps=self.rebost.search(app)
+		return(apps)
+	#def searchApp
+
+	def searchAppByUrl(self,url):
+		self._testConnection()
+		apps=self.rebost.searchAppByUrl(url)
+		return(apps)
 	#def searchApp
 
 	def matchApp(self,package):
@@ -200,11 +210,31 @@ class client():
 	def showApp(self,package):
 		self._testConnection()
 		try:
-			package=self.rebost.show(package,self.user)
+			package=self.rebost.showApp(package)
 		except Exception as e:
 			print(e)
-		return(str(package))
+		return(package)
 	#def searchApp
+
+	def refreshApp(self,package):
+		self._testConnection()
+		try:
+			package=self.rebost.refreshApp(package)
+		except Exception as e:
+			print(e)
+		return(package)
+	#def searchApp
+
+	def setAppState(self,appId,state,bundle,temp=True):
+		self._testConnection()
+		try:
+			if temp==False:
+				package=self.rebost.setAppState(appId,state,bundle)
+			else:
+				package=self.rebost.setAppStateTmp(appId,state)
+		except Exception as e:
+			print(e)
+		return(package)
 
 	def export(self):
 		self._testConnection()
@@ -240,16 +270,15 @@ class client():
 		return(str(installResult))
 	#def installApp
 
-	def testInstall(self,package,bundle,user=''):
+	def getExternalInstaller(self):
 		self._testConnection()
-		if user=='':
-			user=self.user
+		installer=""
 		try:
-			testResult=self.rebost.test(package,bundle,user)
+			installer=self.rebost.getExternalInstaller()
 		except Exception as e:
-			testResult=[("-1",{'pid':"{}",'package':package,'done':1,'status':'','msg':'User has no  permissions'})]
-		return(str(testResult))
-	#def testInstall
+			print(e)
+		return(installer)
+	#def installPpp
 
 	def removeApp(self,package,bundle):
 		self._testConnection()
