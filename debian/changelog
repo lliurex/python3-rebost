@@ -1,3 +1,9 @@
+python3-rebost (2.0.1-0llx25) noble; urgency=medium
+
+  * Stable release
+
+ -- Juanma1980 <juanma1980@gmail.com>  Wed, 29 Oct 2025 11:12:37 +0100
+
 python3-rebost (2.0.0-1llx25) noble-testing; urgency=medium
 
   * Compatibility with rebost>=3.0
