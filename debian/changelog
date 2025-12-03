@@ -1,3 +1,9 @@
+python3-rebost (2.1.0-0llx23) jammy; urgency=medium
+
+  * Use system bus
+
+ -- Juanma1980 <juanma1980@gmail.com>  Wed, 03 Dec 2025 06:43:24 +0100
+
 python3-rebost (2.0.1-0llx23) jammy; urgency=medium
 
   * Synced with llx25
