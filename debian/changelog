@@ -1,8 +1,14 @@
-python3-rebost (2.0.2-0llx23) jammy; urgency=medium
+python3-rebost (2.1.1-0llx23) jammy; urgency=medium
 
   * Add restart method
 
  -- Juanma1980 <juanma1980@gmail.com>  Fri, 19 Dec 2025 19:32:01 +0100
+
+python3-rebost (2.1.0-0llx23) jammy; urgency=medium
+
+  * Use system bus
+
+ -- Juanma1980 <juanma1980@gmail.com>  Wed, 03 Dec 2025 06:43:24 +0100
 
 python3-rebost (2.0.1-0llx23) jammy; urgency=medium
 
