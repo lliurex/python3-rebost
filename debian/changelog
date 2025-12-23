@@ -1,3 +1,9 @@
+python3-rebost (2.1.010llx25) noble; urgency=medium
+
+  * Add restart method
+
+ -- Juanma1980 <juanma1980@gmail.com>  Tue, 23 Dec 2025 09:50:45 +0100
+
 python3-rebost (2.1.0-0llx25) noble; urgency=medium
 
   * Use system bus
