@@ -221,4 +221,10 @@ class client():
 		result=self.rebost.unlock()
 		return(result)
 	#def unlock
+
+	def restart(self):
+		self._connect()
+		result=self.rebost.restart()
+		return(result)
+	#def restart
 	
