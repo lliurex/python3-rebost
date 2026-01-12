@@ -1,3 +1,9 @@
+python3-rebost (2.1.2-0llx23) jammy; urgency=medium
+
+  * Add timeout exception
+
+ -- Juanma1980 <juanma1980@gmail.com>  Mon, 12 Jan 2026 09:21:24 +0100
+
 python3-rebost (2.1.1-0llx23) jammy; urgency=medium
 
   * Add restart method
