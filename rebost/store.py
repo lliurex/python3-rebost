@@ -103,13 +103,29 @@ class client():
 
 	def getAppsInCategory(self,category,limit=0):
 		self._testConnection()
-		appsInCategory=self.rebost.getAppsInCategory(category)
+		try:
+			appsInCategory=self.rebost.getAppsInCategory(category)
+		except dbus.exceptions.DBusException as e:
+			#wait 4
+			time.sleep(4)
+			try:
+				appsInCategory=self.rebost.getAppsInCategory(category)
+			except:
+				appsInCategory=str([])
 		return(appsInCategory)
 	#def getAppsInCategory
 
 	def getAppsInstalled(self):
 		self._testConnection()
-		installedApps=self.rebost.getAppsInstalled()
+		try:
+			installedApps=self.rebost.getAppsInstalled()
+		except dbus.exceptions.DBusException as e:
+			#wait 4
+			time.sleep(4)
+			try:
+				installedApps=self.rebost.getAppsInstalled()
+			except:
+				installedApps=str([])
 		return(installedApps)
 	#def getInstalledApps
 
