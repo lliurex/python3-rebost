@@ -189,9 +189,10 @@ class client():
 
 	def setAppState(self,appId,state,bundle,temp=True):
 		self._testConnection()
+		package=None
 		try:
 			if temp==False:
-				package=self.rebost.setAppState(appId,state,bundle)
+				package=self.rebost.setAppState(appId,bundle,state)
 			else:
 				package=self.rebost.setAppStateTmp(appId,state)
 		except Exception as e:
