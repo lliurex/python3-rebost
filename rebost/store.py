@@ -96,6 +96,12 @@ class client():
 		return(categories)
 	#def getCategories
 
+	def getMaps(self):
+		self._testConnection()
+		maps=self.rebost.getMaps()
+		return(maps)
+	#def getMaps
+
 	def getAppsPerCategory(self):
 		self._testConnection()
 		apps=self.rebost.getAppsPerCategory()
