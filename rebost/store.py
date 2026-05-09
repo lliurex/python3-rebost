@@ -26,6 +26,7 @@ class client():
 				self.user=sudo_user
 		self._debug("Selected user: {}".format(self.user))
 		self.rebost=None
+	#def __init__
 
 	def _debug(self,msg):
 		if self.dbg:
@@ -81,19 +82,25 @@ class client():
 		self._testConnection()
 		formats=self.rebost.getSupportedFormats()
 		return(formats)
-	#def getSupportedFormats(
+	#def getSupportedFormats
 
 	def getFreedesktopCategories(self):
 		self._testConnection()
 		categories=self.rebost.getFreedesktopCategories()
 		return(categories)
-	#def getFreedesktopCategories(self):
+	#def getFreedesktopCategories
 
 	def getCategories(self):
 		self._testConnection()
 		categories=self.rebost.getCategories()
 		return(categories)
-	#def getCategories(self):
+	#def getCategories
+
+	def getMaps(self):
+		self._testConnection()
+		maps=self.rebost.getMaps()
+		return(maps)
+	#def getMaps
 
 	def getAppsPerCategory(self):
 		self._testConnection()
@@ -127,7 +134,7 @@ class client():
 			except:
 				installedApps=str([])
 		return(installedApps)
-	#def getInstalledApps
+	#def getAppsInstalled
 
 	def getAppsInstalledPerCategory(self):
 		apps=self.getAppsInstalled()
@@ -149,13 +156,13 @@ class client():
 			user=self.user
 		upgradableApps=self.rebost.getUpgradableApps(user)
 		return(str(upgradableApps))
-	#def getInstalledApps
+	#def getUpgradableApps
 
 	def getApps(self):
 		self._testConnection()
 		apps=self.rebost.getApps()
 		return(apps)
-	#def getInstalledApps
+	#def getApps
 
 	def searchApp(self,app):
 		self._testConnection()
@@ -167,7 +174,7 @@ class client():
 		self._testConnection()
 		apps=self.rebost.searchAppByUrl(url)
 		return(apps)
-	#def searchApp
+	#def searchAppByUrl
 
 	def showApp(self,package):
 		self._testConnection()
@@ -176,7 +183,7 @@ class client():
 		except Exception as e:
 			print(e)
 		return(package)
-	#def searchApp
+	#def showApp
 
 	def refreshApp(self,package):
 		self._testConnection()
@@ -185,7 +192,7 @@ class client():
 		except Exception as e:
 			print(e)
 		return(package)
-	#def searchApp
+	#def refreshApp
 
 	def setAppState(self,appId,state,bundle,temp=True):
 		self._testConnection()
@@ -198,6 +205,7 @@ class client():
 		except Exception as e:
 			print(e)
 		return(package)
+	#def setAppState
 
 	def export(self):
 		self._testConnection()
@@ -206,7 +214,7 @@ class client():
 		except Exception as e:
 			print(e)
 		return("")
-	#def searchApp
+	#def export
 
 	def getExternalInstaller(self):
 		self._testConnection()
@@ -216,7 +224,7 @@ class client():
 		except Exception as e:
 			print(e)
 		return(installer)
-	#def installPpp
+	#def getExternalInstaller
 
 	def remoteInstall(self,package,bundle,user=''): #PENDING (remote-installer)
 		return()
