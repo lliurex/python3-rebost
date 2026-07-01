@@ -187,11 +187,12 @@ class client():
 
 	def refreshApp(self,package):
 		self._testConnection()
+		refreshedPkg='{}'
 		try:
-			package=self.rebost.refreshApp(package)
+			refreshedPkg=self.rebost.refreshApp(package)
 		except Exception as e:
 			print(e)
-		return(package)
+		return(refreshedPkg)
 	#def refreshApp
 
 	def setAppState(self,appId,state,bundle,temp=True):
