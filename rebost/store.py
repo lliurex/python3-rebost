@@ -187,13 +187,22 @@ class client():
 
 	def refreshApp(self,package):
 		self._testConnection()
-		refreshedPkg='{}'
 		try:
-			refreshedPkg=self.rebost.refreshApp(package)
+			package=self.rebost.refreshApp(package)
 		except Exception as e:
 			print(e)
-		return(refreshedPkg)
+		return(package)
 	#def refreshApp
+
+	def addAppFromYml(self,fyml,bundleKind="",bundleId=""):
+		self._testConnection()
+		package=None
+		try:
+			package=self.rebost.addAppFromYml(fyml,bundleKind,bundleId)
+		except Exception as e:
+			print(e)
+		return(package)
+	#def addAppFromYml
 
 	def setAppState(self,appId,state,bundle,temp=True):
 		self._testConnection()
