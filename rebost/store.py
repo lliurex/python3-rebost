@@ -42,9 +42,10 @@ class client():
 			sys.exit(1)
 		#Five attempts within 60sec
 		current=int(time.time())
-		end=current+60
+		end=current+10
 		waitFor=1
 		rebost=None
+		err=""
 		while end>current:
 			try:
 				rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
@@ -52,12 +53,18 @@ class client():
 			except Exception as e:
 				print("Could not connect to bus: {}\nAborting".format(e))
 				print("2nd attempt...")
+				err=e
 				time.sleep(waitFor)
 				current=int(time.time())
-				rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+				try:
+					rebost=bus.get_object("net.lliurex.rebost","/net/lliurex/rebost")
+				except Exception as e:
+					err=e
+					print("Service unavailable")
 
 		if rebost==None:
-			print("Could not reconnect to bus: %s\nAborting"%e)
+			print("Could not reconnect to bus: {}\nAborting".format(err))
+			raise Exception("Rebost D-BUS not available")
 			sys.exit(1)
 		self.rebost=dbus.Interface(rebost,"net.lliurex.rebost")
 	#def _connect
@@ -189,6 +196,15 @@ class client():
 		self._testConnection()
 		try:
 			package=self.rebost.refreshApp(package)
+		except Exception as e:
+			print(e)
+		return(package)
+	#def refreshApp
+
+	def refreshVerifiedApp(self,package):
+		self._testConnection()
+		try:
+			package=self.rebost.refreshVerifiedApp(package)
 		except Exception as e:
 			print(e)
 		return(package)
